@@ -22,7 +22,7 @@ class Game:
     def _deal_hand(self) -> Hand:
         return Hand.get_hand_from_cards([self._deck.draw_card() for _ in range(3)])
 
-    def _process_tie_game(self, hands: List[Hand]) -> Player:
+    def _process_tie_breaker(self, hands: List[Hand]) -> Player:
         print("Game is tied, Each player to draw cards until one of them get a higher card")
         game_drawn = True
         players = [self._hand_to_player[hand] for hand in hands]
@@ -65,7 +65,7 @@ class Game:
         hands = Hand.sort_hands(hands)
         strongest_hand = hands[FIRST_HAND]
         if self._check_if_draw(strongest_hand, hands):
-            return self._process_tie_game(hands)
+            return self._process_tie_breaker(hands)
         return self._hand_to_player[strongest_hand]
 
     def run(self):
