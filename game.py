@@ -3,18 +3,20 @@ from player import Player
 from deck import Deck
 from typing import List
 from card import Card
+from config import NUM_OF_PLAYERS
 
 
 class Game:
-    def __init__(self, deck: Deck = Deck()):
+    def __init__(self, deck: Deck = Deck(), number_of_players=NUM_OF_PLAYERS):
         self._players = []
         self._hand_to_player = {}
         self._deck = deck
+        self.number_of_players = number_of_players
         self._game_setup()
 
     def _game_setup(self):
         self._players = []
-        for i in range(1, 5):
+        for i in range(1, self.number_of_players+1):
             self._players.append(Player("Player {}".format(i)))
 
     def _deal_hand(self) -> Hand:
