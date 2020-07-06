@@ -22,10 +22,10 @@ class TestDeck(TestCase):
         self.assertEqual(52, deck.get_num_of_cards())
         drawn_cards = []
         for _ in range(20):
-            drawn_cards.append(deck.draw_card().string())
+            drawn_cards.append(str(deck.draw_card()))
         self.assertEqual(32, deck.get_num_of_cards())
-        self.assertEqual(20, len(list(filter(lambda x: x.string() in drawn_cards, original_cards))))
-        self.assertEqual(0, len(list(filter(lambda x: x.string() in drawn_cards, cards))))
+        self.assertEqual(20, len(list(filter(lambda x: str(x) in drawn_cards, original_cards))))
+        self.assertEqual(0, len(list(filter(lambda x: str(x) in drawn_cards, cards))))
 
     def test_reset_deck(self):
         deck = Deck()

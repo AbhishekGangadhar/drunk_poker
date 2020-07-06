@@ -29,13 +29,12 @@ class Card:
         self.__suit = suit
         self.__rank = rank
 
+    def __str__(self) -> str:
+        return f"{self.__rank.name} of {self.__suit.value}"
+
     def get_suit(self) -> Suit:
         return self.__suit
 
     def get_rank(self) -> Rank:
         return self.__rank
-
-    def string(self) -> str:
-        return f"{self.__rank.name} of {self.__suit.value}"
-
 
