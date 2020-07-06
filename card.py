@@ -38,6 +38,4 @@ class Card:
     def string(self) -> str:
         return f"{self.__rank.name} of {self.__suit.value}"
 
-    def get_rank_val(self) -> int:
-        return self.__rank.value
 
