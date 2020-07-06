@@ -49,17 +49,20 @@ class TestGame(TestCase):
     @patch("game.Game._process_tie_game", mock_process_tie_game)
     def test_process_hands(self):
         game = Game()
-        mocked_cards = []
+        _set_of_aces = [_ACE_OF_HEARTS, _ACE_OF_SPADES, _ACE_OF_HEARTS]
+        _pair_of_aces = [_ACE_OF_HEARTS, _ACE_OF_SPADES, _KING_OF_CLUBS]
         game._hand_to_player = {
-            Hand(mocked_cards, HandType.SET, Rank.ACE, Rank.ACE): _PLAYER_1,
-            Hand(mocked_cards, HandType.PAIR, Rank.ACE, Rank.ACE): _PLAYER_2,
+            Hand(_set_of_aces, HandType.SET, Rank.ACE, Rank.ACE): _PLAYER_1,
+            Hand(_pair_of_aces, HandType.PAIR, Rank.ACE, Rank.ACE): _PLAYER_2,
         }
         game._players = game._hand_to_player.values()
         self.assertEqual(_PLAYER_1, game._process_hands())
 
+        _ace_high = [_ACE_OF_HEARTS, _FOUR_OF_HEARTS, _KING_OF_CLUBS]
+        _pair_of_sevens = [_SEVEN_OF_CLUBS, _SEVEN_OF_HEARTS, _KING_OF_CLUBS]
         game._hand_to_player = {
-            Hand(mocked_cards, HandType.HIGH_CARD, Rank.ACE, Rank.ACE): _PLAYER_1,
-            Hand(mocked_cards, HandType.PAIR, Rank.SEVEN, Rank.ACE): _PLAYER_2,
+            Hand(_pair_of_aces, HandType.HIGH_CARD, Rank.ACE, Rank.ACE): _PLAYER_1,
+            Hand(_pair_of_sevens, HandType.PAIR, Rank.SEVEN, Rank.ACE): _PLAYER_2,
         }
         self.assertEqual(_PLAYER_2, game._process_hands())
 

@@ -3,7 +3,6 @@ from player import Player
 from deck import Deck
 from typing import List
 from card import Card
-from collections import Counter
 
 
 class Game:
@@ -45,46 +44,25 @@ class Game:
                 self._deck.reset_deck()
             print("Still a draw!!")
 
-    def _process_hands(self) -> Player:
-        FIRST_ELEMENT = 0
-
-        # Checking if there is only one hand with best hand type
-        hands = sorted(self._hand_to_player.keys(), key=lambda x: x.get_hand_type().value, reverse=True)
-        best_hand_rank = hands[FIRST_ELEMENT].get_hand_type().value
-        hands = list(filter(lambda x: x.get_hand_type().value == best_hand_rank, hands))
-        if len(hands) == 1:
-            return self._hand_to_player[hands[FIRST_ELEMENT]]
-
-        # Checking if there is only one hand with best hand type rank
-        hands = sorted(hands, key=lambda x: x.get_hand_type_rank().value, reverse=True)
-        best_hand_type_rank = hands[FIRST_ELEMENT].get_hand_type_rank().value
-        hands = list(filter(lambda x: x.get_hand_type_rank().value == best_hand_type_rank, hands))
-        if len(hands) == 1:
-            return self._hand_to_player[hands[FIRST_ELEMENT]]
-
-        # Checking for the best high card hand
-        hands_to_cards = {}
+    @classmethod
+    def _check_if_draw(cls, strongest_hand: Hand, hands: List[Hand]) -> bool:
+        hands_count = 0
         for hand in hands:
-            hands_to_cards[hand] = Card.sort_cards_by_rank(hand.get_cards())
+            if hand.get_hand_type() == strongest_hand.get_hand_type()\
+                and hand.get_hand_type_rank() == strongest_hand.get_hand_type_rank()\
+                and hand.get_high_card_rank() == strongest_hand.get_high_card_rank()\
+                    and hand.get_cards_value() == strongest_hand.get_cards_value():
+                hands_count += 1
+        return hands_count > 1
 
-        for _ in range(3):
-            rank_value_counter = Counter([cards[FIRST_ELEMENT].get_rank().value for cards in hands_to_cards.values()])
-            best_high_card_rank_val = max(rank_value_counter.keys())
-
-            if rank_value_counter[best_high_card_rank_val] == 1:
-                for hand, cards in hands_to_cards.items():
-                    if cards[FIRST_ELEMENT].get_rank().value == best_high_card_rank_val:
-                        return self._hand_to_player[hand]
-            else:
-                hands_to_be_deleted = []
-                for hand, cards in hands_to_cards.items():
-                    if cards[FIRST_ELEMENT].get_rank().value != best_high_card_rank_val:
-                        hands_to_be_deleted.append(hand)
-                    else:
-                        cards.pop(0)
-                for hand in hands_to_be_deleted:
-                    del hands_to_cards[hand]
-        return self._process_tie_game(hands)
+    def _process_hands(self) -> Player:
+        FIRST_HAND = 0
+        hands = list(self._hand_to_player.keys())
+        hands = Hand.sort_hands(hands)
+        strongest_hand = hands[FIRST_HAND]
+        if self._check_if_draw(strongest_hand, hands):
+            return self._process_tie_game(hands)
+        return self._hand_to_player[strongest_hand]
 
     def run(self):
         print()

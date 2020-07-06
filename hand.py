@@ -17,7 +17,9 @@ class Hand:
         self.__hand_type = hand_type
         self.__hand_type_rank = hand_type_rank
         self.__high_card_rank = high_card_rank
-        self.__cards = cards
+        if len(cards) != 3:
+            raise ValueError("Length of the cards need to be 3, given: {} cards".format(len(cards)))
+        self.__cards = Card.sort_cards_by_rank(cards)
 
     def get_hand_type(self) -> HandType:
         return self.__hand_type
@@ -27,6 +29,11 @@ class Hand:
 
     def get_high_card_rank(self) -> Rank:
         return self.__high_card_rank
+
+    # Measure of the value of all 3 cards in hands
+    def get_cards_value(self) -> int:
+        cards_rank_values = [card.get_rank().value if card.get_rank() != Rank.ACE else 14 for card in self.get_cards()]
+        return 100 * cards_rank_values[0] + 10 * cards_rank_values[1] + cards_rank_values[2]
 
     def get_cards(self) -> List[Card]:
         return self.__cards
@@ -59,3 +66,17 @@ class Hand:
         if Rank.ACE in [card.get_rank() for card in cards]:
             high_card_rank = Rank.ACE
         return Hand(cards, HandType.HIGH_CARD, high_card_rank, high_card_rank)
+
+    @staticmethod
+    def __hand_comparison(hand):
+        hand_type_rank_value = hand.get_hand_type_rank().value
+        if hand.get_hand_type_rank() == Rank.ACE:
+            hand_type_rank_value = 14
+        high_card_rank_value = hand.get_high_card_rank().value
+        if hand.get_high_card_rank() == Rank.ACE:
+            high_card_rank_value = 14
+        return hand.get_hand_type().value, hand_type_rank_value, high_card_rank_value, hand.get_cards_value()
+
+    @staticmethod
+    def sort_hands(hands):
+        return sorted(hands, key=Hand.__hand_comparison, reverse=True)
