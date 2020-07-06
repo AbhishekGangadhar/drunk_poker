@@ -3,11 +3,11 @@ from player import Player
 from deck import Deck
 from typing import List
 from card import Card
-from config import NUM_OF_PLAYERS
+from config import DEFAULT_NUM_OF_PLAYERS
 
 
 class Game:
-    def __init__(self, deck: Deck = Deck(), number_of_players=NUM_OF_PLAYERS):
+    def __init__(self, deck: Deck = Deck(), number_of_players=DEFAULT_NUM_OF_PLAYERS):
         self._players = []
         self._hand_to_player = {}
         self._deck = deck
