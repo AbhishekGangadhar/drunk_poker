@@ -27,7 +27,7 @@ _PLAYER_1 = Player("Player 1")
 _PLAYER_2 = Player("Player 2")
 
 
-def mock_process_tie_game(self, hands) -> Player:
+def mock_process_tie_breaker(self, hands) -> Player:
     return _PLAYER_2
 
 
@@ -46,7 +46,7 @@ class TestGame(TestCase):
         self.assertEqual(Rank.SEVEN, hand.get_hand_type_rank())
         self.assertEqual(Rank.ACE, hand.get_high_card_rank())
 
-    @patch("game.Game._process_tie_game", mock_process_tie_game)
+    @patch("game.Game._process_tie_breaker", mock_process_tie_breaker)
     def test_process_hands(self):
         game = Game()
         _set_of_aces = [_ACE_OF_HEARTS, _ACE_OF_SPADES, _ACE_OF_HEARTS]
@@ -78,7 +78,7 @@ class TestGame(TestCase):
         }
         self.assertEqual(_PLAYER_2, game._process_hands())
 
-    def test_process_tie_game(self):
+    def test_process_tie_breaker(self):
         deck = Deck()
         deck._cards.extend(list(reversed([
             _QUEEN_OF_CLUBS,  # player 1
