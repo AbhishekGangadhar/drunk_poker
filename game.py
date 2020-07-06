@@ -41,7 +41,7 @@ class Game:
             cards = Card.sort_cards_by_rank(cards)
             if cards[FIRST_CARD].get_rank().value > cards[SECOND_CARD].get_rank().value:
                 return card_to_player[cards[FIRST_CARD]]
-            if self._deck.get_num_of_cards() < 3:
+            if self._deck.get_num_of_cards() < len(self._players):
                 self._deck.reset_deck()
             print("Still a draw!!")
 
