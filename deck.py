@@ -30,4 +30,4 @@ class Deck:
     def draw_card(self) -> Card:
         if len(self._cards) == 0:
             raise ValueError("No more cards in the deck")
-        return self._cards.pop(0)
+        return self._cards.pop()
