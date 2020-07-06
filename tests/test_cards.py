@@ -36,5 +36,5 @@ class TestCards(TestCase):
         self.assertEqual([_ACE_OF_SPADES, _JACK_OF_DIAMONDS, _TWO_OF_HEARTS], sorted_cards)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

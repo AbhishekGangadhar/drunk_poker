@@ -1,4 +1,3 @@
-
 class Player:
     def __init__(self, name: str):
         self.__name = name
@@ -11,4 +10,3 @@ class Player:
 
     def set_name(self, name: str):
         self.__name = name
-

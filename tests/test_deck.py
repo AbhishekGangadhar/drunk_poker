@@ -37,5 +37,5 @@ class TestDeck(TestCase):
         self.assertEqual(52, deck.get_num_of_cards())
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

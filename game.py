@@ -48,10 +48,12 @@ class Game:
     def _check_if_draw(cls, strongest_hand: Hand, hands: List[Hand]) -> bool:
         hands_count = 0
         for hand in hands:
-            if hand.get_hand_type() == strongest_hand.get_hand_type()\
-                and hand.get_hand_type_rank() == strongest_hand.get_hand_type_rank()\
-                and hand.get_high_card_rank() == strongest_hand.get_high_card_rank()\
-                    and hand.get_cards_value() == strongest_hand.get_cards_value():
+            if (
+                hand.get_hand_type() == strongest_hand.get_hand_type()
+                and hand.get_hand_type_rank() == strongest_hand.get_hand_type_rank()
+                and hand.get_high_card_rank() == strongest_hand.get_high_card_rank()
+                and hand.get_cards_value() == strongest_hand.get_cards_value()
+            ):
                 hands_count += 1
         return hands_count > 1
 
@@ -80,5 +82,3 @@ class Game:
         print()
         print(" *********************** Bye! *********************** ")
         print()
-
-

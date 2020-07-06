@@ -75,7 +75,12 @@ class Hand:
         high_card_rank_value = hand.get_high_card_rank().value
         if hand.get_high_card_rank() == Rank.ACE:
             high_card_rank_value = 14
-        return hand.get_hand_type().value, hand_type_rank_value, high_card_rank_value, hand.get_cards_value()
+        return (
+            hand.get_hand_type().value,
+            hand_type_rank_value,
+            high_card_rank_value,
+            hand.get_cards_value(),
+        )
 
     @staticmethod
     def sort_hands(hands):

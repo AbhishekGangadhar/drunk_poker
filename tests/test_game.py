@@ -103,5 +103,5 @@ class TestGame(TestCase):
         self.assertEqual(_PLAYER_2, game._process_hands())
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

@@ -2,8 +2,19 @@ import unittest
 from unittest import TestCase
 from hand import Hand, HandType
 from card import Rank
-from tests.utils import _ACE_OF_SPADES, _ACE_OF_CLUBS, _ACE_OF_HEARTS, _KING_OF_CLUBS, _QUEEN_OF_CLUBS, \
-    _TWO_OF_SPADES, _THREE_OF_CLUBS, _FOUR_OF_HEARTS, _SEVEN_OF_SPADES, _SEVEN_OF_CLUBS, _SEVEN_OF_HEARTS
+from tests.utils import (
+    _ACE_OF_SPADES,
+    _ACE_OF_CLUBS,
+    _ACE_OF_HEARTS,
+    _KING_OF_CLUBS,
+    _QUEEN_OF_CLUBS,
+    _TWO_OF_SPADES,
+    _THREE_OF_CLUBS,
+    _FOUR_OF_HEARTS,
+    _SEVEN_OF_SPADES,
+    _SEVEN_OF_CLUBS,
+    _SEVEN_OF_HEARTS,
+)
 
 set_of_aces = [_ACE_OF_SPADES, _ACE_OF_CLUBS, _ACE_OF_HEARTS]
 set_of_sevens = [_SEVEN_OF_SPADES, _SEVEN_OF_CLUBS, _SEVEN_OF_HEARTS]
@@ -91,5 +102,5 @@ class TestHand(TestCase):
         self.assertEqual([hand_8, hand_9, hand_10], sorted_hands)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()
