@@ -38,3 +38,9 @@ class Card:
     def get_rank(self) -> Rank:
         return self.__rank
 
+    @staticmethod
+    def sort_cards_by_rank(cards):
+        aces = list(filter(lambda x: x.get_rank() == Rank.ACE, cards))
+        non_ace_cards = list(filter(lambda x: x.get_rank() != Rank.ACE, cards))
+        non_ace_cards = sorted(non_ace_cards, key=lambda x: x.get_rank().value, reverse=True)
+        return aces + non_ace_cards
