@@ -1,11 +1,7 @@
 import unittest
 from unittest import TestCase
 from card import Card, Suit, Rank
-
-_ACE_OF_SPADES = Card(Suit.SPADES, Rank.ACE)
-_TWO_OF_HEARTS = Card(Suit.HEARTS, Rank.TWO)
-_SEVEN_OF_CLUBS = Card(Suit.CLUBS, Rank.SEVEN)
-_JACK_OF_DIAMONDS = Card(Suit.DIAMONDS, Rank.JACK)
+from tests.utils import _ACE_OF_SPADES, _TWO_OF_HEARTS, _JACK_OF_DIAMONDS, _SEVEN_OF_CLUBS
 
 
 class TestCards(TestCase):

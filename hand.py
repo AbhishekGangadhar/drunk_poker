@@ -15,15 +15,15 @@ class HandType(Enum):
 class Hand:
     def __init__(self, cards: List[Card], hand_type: HandType, hand_type_rank: Rank, high_card_rank: Rank):
         self.__hand_type = hand_type
-        self.__hand_rank_high_card = hand_type_rank
+        self.__hand_type_rank = hand_type_rank
         self.__high_card_rank = high_card_rank
         self.__cards = cards
 
     def get_hand_type(self) -> HandType:
         return self.__hand_type
 
-    def get_hand_rank_high_card(self) -> Rank:
-        return self.__hand_rank_high_card
+    def get_hand_type_rank(self) -> Rank:
+        return self.__hand_type_rank
 
     def get_high_card_rank(self) -> Rank:
         return self.__high_card_rank
